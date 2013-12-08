@@ -34,7 +34,6 @@ int main(int argc, char** argv)
     
    //Output Main title
        main_ttl();
-       
     do
     {
     //Output main menu
@@ -92,7 +91,7 @@ void main_ttl()
     cout<<"   # # # ###           #     # ##     #     #   #   #    #           \n";
     cout<<"    ###   #            #     #   #    #    # ### #  #     ###        \n";
     cout<<"          #            #     #    #  ###  #       # ###  #   #       \n";
-    cout<<"                                                          ###        \n";
+    cout<<"                                                          ###  V.2.0 \n";
     cout<<" \n";
     cout<<"********************************************************************\n";
     cout<<"Created by Guillermo Acuna\n";
@@ -204,6 +203,7 @@ void game()
          //Attack based enemy,reward: long sword
          case 'L':
          {   
+             cout<<" \n";
              cout<<"You follow a strange feeling in your gut, and take the left path. "
                  <<"You walk along a widening path, listening to stillness. You slowly start hearing "
                  <<"a metallic, dragging sound. The path opens up, and you find yourself in a flat round cavern."
@@ -219,6 +219,7 @@ void game()
              //reward for battle
              if (statPl[0]>0)
              {
+                 cout<<" \n";
                  cout<<"The creature falls, and you stand. Surprised, but alive. You defeated the "
                      <<"monster with nothing but a short sword....but not for long. "
                      <<"You walk over to the corpse, and grab the glimmering long sword. "
@@ -229,8 +230,11 @@ void game()
              }
              if (statPl[0]<=0)
              {
+                 cout<<" \n";
                  cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
                      <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
+                 
+                 loseGm();
                  
                  return;
              }
@@ -241,6 +245,7 @@ void game()
          //Defense based enemy,reward: shield
          case 'R':
          {
+             cout<<" \n";
              cout<<"Your instincts push you to walk the right path, and you hurry without looking back."
                  <<" The path narrows slightly as you walk, until you reach what looks like a round, "
                  <<"wooden plaque. Then, suddenly it moves towards you, and you see that its a shield "
@@ -255,6 +260,7 @@ void game()
              //reward for 1st battle
              if (statPl[0]>0)
              {
+                 cout<<" \n";
                  cout<<"You feel a sense of relief as your enemy slumps forward, and falls. "
                      <<"You survived a battle with nothing but a short sword. You smile, as you "
                      <<"realize that the shield still works. You walk to the fallen enemy, grab "
@@ -265,8 +271,11 @@ void game()
              }
              if (statPl[0]<=0)
              {
+                 cout<<" \n";
                  cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
                      <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
+                 
+                 loseGm();
                  
                  return;
              }
@@ -276,6 +285,7 @@ void game()
          
          default:
          {
+             cout<<" \n";
              cout<<"Adventurer!! This is no time for games!!\n";
              break;
          }
@@ -283,6 +293,7 @@ void game()
    }while(choiceG!='R'&&choiceG!='L'); 
    
    //Act 2
+   cout<<" \n";
    cout<<"After your first encounter with that dead creature, your desire to leave this "
        <<"strange realm is renewed. You continue along your chosen path, and notice a light in the distance. "
        <<"Happiness fills you as you run towards it. Is this the end of this dark cave? The light gives way, and"
@@ -295,15 +306,16 @@ void game()
        <<" attached to the right arm. Already sensing the coming calamity, you draw your weapon and face it....\n";
    
    //second enemy stat set
-   statEn[1]=12.0;
-   statEn[2]=12.0;
-   statEn[0]=12.0;
+   statEn[1]=13.0;
+   statEn[2]=13.0;
+   statEn[0]=13.0;
 
    statPl[0]=fihtstr(statPl,statEn);
    
    //reward for 2nd battle
    if (statPl[0]>0)
    {
+       cout<<" \n";
      cout<<"The dead, bladed man falls back and drops as you push forward with swings of your weapon. " 
          <<"Feeling a savage rush within, you strike a mighty final blow and the enemy is no more. The "
          <<"shadows recede into the cave once more, leaving you standing in the night facing the bridge. "
@@ -313,6 +325,7 @@ void game()
      
      do
      {
+         cout<<" \n";
         cout<<"Choose A for the arm bladed bucklers, or D for the dagger: ";
         cin>>choiceG;
      
@@ -332,6 +345,7 @@ void game()
                break;
             }
             default:{
+                cout<<" \n";
                 cout<<"Adventurer!! This is no time for games!!\n";
                 break;
             }
@@ -341,13 +355,17 @@ void game()
    }
    if (statPl[0]<=0)
    {
+       cout<<" \n";
         cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
             <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
                  
-      return;
+        loseGm();
+                 
+        return;
    }
    
    //Act Three
+   cout<<" \n";
    cout<<"Having defeated the enemy and claimed a boon, you continue forward. "
        <<"Something in your mind starts changing, as you look over the edge of the cliff. "
        <<"You start feeling strangely comfortable with this adventure. You make your way across "
@@ -374,6 +392,7 @@ void game()
    //reward for fight three
    if (statPl[0]>0)
    {
+     cout<<" \n";
      cout<<"You howl to the skies, and make a final charge in. The wounded, and dying Minotaur launches "
          <<"a desperation blow. You dodge under, and strike hard upward. The Minotaur falls. "
          <<" His head rolls away before you, and you realize you've never felt more alive. Has it been one night;"
@@ -383,6 +402,7 @@ void game()
      
      do
      {
+        cout<<" \n";
         cout<<"Choose G for the Great Hammer, or H for the Horned Helmet: ";
         cin>>choiceG;
      
@@ -400,6 +420,7 @@ void game()
                break;
             }
             default:{
+                cout<<" \n";
                 cout<<"Adventurer!! This is no time for games!!\n";
                 break;
             }
@@ -409,13 +430,17 @@ void game()
    }
    if (statPl[0]<=0)
    {
-        cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
+       cout<<" \n";
+       cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
             <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
                  
-      return;
+        loseGm();
+        
+        return;
    }
    
    //Act 4
+   cout<<" \n";
    cout<<"You stand up, your boon in hand. You feel like a different person. You look around at the "
        <<"pale surface, and at the starless sky were you see the earth. You notice its smiling through a "
        <<"giant fissure on the surface. Truly, this land is insane, you think. You start walking "
@@ -436,6 +461,7 @@ void game()
    {
        case 'L'://attack boost, spike leather armor
        {
+           cout<<" \n";
            cout<<"You step confidently up to the left chest. The fighter makes sense to you. It opens before you and lightweight,"
                <<" leather armor with numerous spikes float out and assembles itself on your body. "
                <<"You feel its energy flow through you, and you smile.\n";
@@ -447,6 +473,7 @@ void game()
        
        case 'R'://defense boost, steel chainmail with plating
        {
+           cout<<" \n";
            cout<<"The chest on the right calls to you. The Protecter chest opens and shining steel chainmail"
                <<" flies up. Plating circulates it as it assembles to your body. It fills you with its energy, "
                <<"and you smile.\n";
@@ -459,6 +486,7 @@ void game()
   }while(choiceG!='L'&&choiceG!='R');
   
   //Final Act
+  cout<<" \n";
   cout<<"The old man smiles also, after you choose. He says to to you 'Good luck...', and vanishes. "
       <<"You look up because you hear a burning sound from the sky. You see a meteor falling towards your area"
       <<", and you know there is no time to run. It lands in front of you and explodes with deafening sound, and"
@@ -479,6 +507,7 @@ void game()
   
   if (statPl[0]>0)
   {
+      cout<<" \n";
       cout<<"You make a final, victorious jump up, and plunge your weapon into the heart "
           <<"of the great warrior. He howls, and bursts into smoke. You're caught completely by surprise, and"
           <<" get enveloped in the smoke. The world swirls, and you see yourself floating. You look down, and see the "
@@ -507,6 +536,8 @@ void game()
   {
       cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
           <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
+      
+      loseGm();
                  
       return;
   }
@@ -583,7 +614,10 @@ float atkstr(float sP[],float sE[])
     int accPl,accEn;//Accuracy of player, and accuracy of enemy
     
     if((accPl=(rand()%90+10))>(accEn=(rand()%90+10))){
-        if(accPl-accEn>12){sP[1]+=5.0;}
+        if(accPl-accEn>12){
+            sP[1]+=5.0;
+            cout<<" You aim your strike at a weak point!\n";
+        }
         dmgDne=sP[1]-sE[2];
     
        if (dmgDne<0)
@@ -617,7 +651,7 @@ float atkstr(float sP[],float sE[])
        if (dmgDne>0)
        {
           sP[0]-=dmgDne;
-          cout<<"The enemy strikes back, landing a clean blow also.\n";
+          cout<<"The enemy strikes back, landing a clean blow.\n";
        }
        if (dmgDne==0)
        {
@@ -666,4 +700,16 @@ float defstr(float sP[],float sE[])
     hlthET2=sE[0];
  
     return sP[0];
+}
+
+void loseGm(){
+    cout<<" \n";
+    cout<<"   @@    @@     @@    @    @        @       @@     @@      @@@@     \n";
+    cout<<"     @  @      @  @   @    @        @      @  @   @  @     @        \n";
+    cout<<"      @@       @  @   @    @        @      @  @   @        @        \n";
+    cout<<"      @@       @  @   @    @        @      @  @    @@      @@@      \n";
+    cout<<"      @@       @  @   @    @        @      @  @      @     @        \n";
+    cout<<"      @@       @  @   @    @        @   @  @  @   @  @     @        \n";
+    cout<<"      @@        @@     @@@@         @@@@@   @@     @@      @@@      \n";
+    cout<<" \n";
 }
