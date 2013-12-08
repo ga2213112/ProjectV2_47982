@@ -218,17 +218,17 @@ void game()
              statPl[0]=fihtstr(statPl,statEn);
              
              //reward for battle
-             if (hlthP>0)
+             if (statPl[0]>0)
              {
                  cout<<"The creature falls, and you stand. Surprised, but alive. You defeated the "
                      <<"monster with nothing but a short sword....but not for long. "
                      <<"You walk over to the corpse, and grab the glimmering long sword. "
                      <<"This weapon is much better then yours. You sheathe it, and continue forward.\n";
-                 hlthP+=5;//after battle healing
+                 statPl[0]+=5;//after battle healing
                  
-                 atkP+=(atkP*5e-2f);//Long sword augmentation
+                 statPl[1]+=(statPl[1]*5e-2f);//Long sword augmentation
              }
-             if (hlthP<=0)
+             if (statPl[0]<=0)
              {
                  cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
                      <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
@@ -247,24 +247,24 @@ void game()
                  <<"wooden plaque. Then, suddenly it moves towards you, and you see that its a shield "
                  <<"with a rotting warrior behind it. You swallow your revulsion, and lift up your sword...\n";
              
-             atkE+=8.0;
-             defE+=11.0;
-             hlthE+=11.0;
+             statEn[1]+=8.0;
+             statEn[2]+=11.0;
+             statEn[0]+=11.0;
              
-             hlthP=fihtstr(atkP,defP,hlthP,atkE,defE,hlthE);
+             statPl[0]=fihtstr(statPl,statEn);
              
              //reward for 1st battle
-             if (hlthP>0)
+             if (statPl[0]>0)
              {
                  cout<<"You feel a sense of relief as your enemy slumps forward, and falls. "
                      <<"You survived a battle with nothing but a short sword. You smile, as you "
                      <<"realize that the shield still works. You walk to the fallen enemy, grab "
                      <<"your new shield, and continue your path.\n";
-                 hlthP+=5;//after battle healing
+                 statPl[0]+=5;//after battle healing
                  
-                 defP+=(defP*5e-2f);//Shield augmentation
+                 statPl[2]+=(statPl[2]*5e-2f);//Shield augmentation
              }
-             if (hlthP<=0)
+             if (statPl[0]<=0)
              {
                  cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
                      <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
@@ -296,21 +296,21 @@ void game()
        <<" attached to the right arm. Already sensing the coming calamity, you draw your weapon and face it....\n";
    
    //second enemy stat set
-   atkE=12.0;
-   defE=12.0;
-   hlthE=12.0;
+   statEn[1]=12.0;
+   statEn[2]=12.0;
+   statEn[0]=12.0;
 
-   hlthP=fihtstr(atkP,defP,hlthP,atkE,defE,hlthE);
+   statPl[0]=fihtstr(statPl,statEn);
    
    //reward for 2nd battle
-   if (hlthP>0)
+   if (statPl[0]>0)
    {
      cout<<"The dead, bladed man falls back and drops as you push forward with swings of your weapon. " 
          <<"Feeling a savage rush within, you strike a mighty final blow and the enemy is no more. The "
          <<"shadows recede into the cave once more, leaving you standing in the night facing the bridge. "
          <<"You look at the corpse, and it's armament, wondering what prize to claim...\n";
      
-     hlthP+=5.0;//health boost
+     statPl[0]+=5.0;//health boost
      
      do
      {
@@ -321,15 +321,15 @@ void game()
         {
             case 'A'://arm blade and buckler boost
             {
-               atkP+=(atkP*5e-2f);
-               defP+=(defP*1e-1f);
+               statPl[1]+=(statPl[1]*5e-2f);
+               statPl[2]+=(statPl[2]*1e-1f);
                break;
             }
             
             case 'D'://Dagger boost
             {
-               atkP+=(atkP*1e-1f);
-               defP+=(defP*5e-2f);
+               statPl[1]+=(statPl[1]*1e-1f);
+               statPl[2]+=(statPl[2]*5e-2f);
                break;
             }
             default:{
@@ -340,7 +340,7 @@ void game()
      
      }while(choiceG!='A'&&choiceG!='D');
    }
-   if (hlthP<=0)
+   if (statPl[0]<=0)
    {
         cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
             <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
@@ -366,21 +366,21 @@ void game()
        <<"take a breath, and charge in letting loose your own growl...\n";
    
    //Third enemy stat set
-   atkE=14.0;
-   defE=14.0;
-   hlthE=16.0;
+   statEn[1]=14.0;
+   statEn[2]=14.0;
+   statEn[0]=16.0;
    
-   hlthP=fihtstr(atkP,defP,hlthP,atkE,defE,hlthE);
+   statPl[0]=fihtstr(statPl,statEn);
    
    //reward for fight three
-   if (hlthP>0)
+   if (statPl[0]>0)
    {
      cout<<"You howl to the skies, and make a final charge in. The wounded, and dying Minotaur launches "
          <<"a desperation blow. You dodge under, and strike hard upward. The Minotaur falls. "
          <<" His head rolls away before you, and you realize you've never felt more alive. Has it been one night;"
          <<" the cave isn't far away, but you feel different since then. You walk to the Minotaurs falling body, "
          <<"already knowing what prize you wanna reach for...\n";
-     hlthP+=5.0;//health boost
+     statPl[0]+=5.0;//health boost
      
      do
      {
@@ -391,13 +391,13 @@ void game()
         {
             case 'G'://Great Hammer boost
             {
-               atkP+=(atkP*15e-2f);
+               statPl[1]+=(statPl[1]*15e-2f);
                break;
             }
             
             case 'H'://Horned Helmet boost
             {
-               defP+=(defP*15e-2f);
+               statPl[2]+=(statPl[2]*15e-2f);
                break;
             }
             default:{
@@ -408,7 +408,7 @@ void game()
      
      }while(choiceG!='G'&&choiceG!='H');
    }
-   if (hlthP<=0)
+   if (statPl[0]<=0)
    {
         cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
             <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
@@ -441,8 +441,8 @@ void game()
                <<" leather armor with numerous spikes float out and assembles itself on your body. "
                <<"You feel its energy flow through you, and you smile.\n";
            
-           atkP+=(atkP*15e-2f);
-           defP+=(defP*5e-2f);
+           statPl[1]+=(statPl[1]*15e-2f);
+           statPl[2]+=(statPl[2]*5e-2f);
            break;
        }
        
@@ -452,8 +452,8 @@ void game()
                <<" flies up. Plating circulates it as it assembles to your body. It fills you with its energy, "
                <<"and you smile.\n";
            
-           atkP+=(atkP*5e-2f);
-           defP+=(defP*15e-2f);
+           statPl[1]+=(statPl[1]*5e-2f);
+           statPl[2]+=(statPl[2]*15e-2f);
            break;
        }
    }
@@ -472,13 +472,13 @@ void game()
       <<" You grow angry, and all fear ceases. You ready your weapon once again, and charge in...\n";
   
   //boss stat set
-  atkE=17.55;
-  defE=15.781;
-  hlthE=18;
+  statEn[1]=17.55;
+  statEn[2]=15.781;
+  statEn[0]=18;
   
-  hlthP=fihtstr(atkP,defP,hlthP,atkE,defE,hlthE);
+  statPl[0]=fihtstr(statPl,statEn);
   
-  if (hlthP>0)
+  if (statPl[0]>0)
   {
       cout<<"You make a final, victorious jump up, and plunge your weapon into the heart "
           <<"of the great warrior. He howls, and bursts into smoke. You're caught completely by surprise, and"
@@ -504,7 +504,7 @@ void game()
       return;
             
   }
-  if (hlthP<=0)
+  if (statPl[0]<=0)
   {
       cout<<"Your body slumps, as pain overwhelms your senses from your wounds."
           <<" You fall, and see the enemy raise its weapon to deliver the final blow...\n";
