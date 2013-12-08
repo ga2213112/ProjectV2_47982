@@ -13,18 +13,17 @@
 #include <ctime>
 using namespace std;
 
-//Global Constants: none
-
-
 //Global Variables
+float hlthET1,hlthET2;//used to keep track of life in battle functions
 
 //Function Prototypes
 void game();
 void records();
 void main_ttl();
-float fihtstr(float []&,float []&);//Main fighting structure
-float atkstr(float []&,float []&);//Attack structure
-float defstr(float []&,float []&);//Defense structure
+float fihtstr(float [],float []);//Main fighting structure
+float atkstr(float [],float []);//Attack structure
+float defstr(float [],float []);//Defense structure
+void loseGm();//Display Losing Screen
 
 //Execution begins Here
 int main(int argc, char** argv) 
@@ -533,7 +532,7 @@ void records()//creates a record of winners
 
 //****************************************************************************
 //After this point,functions are all battle functions of game
-float fihtstr(float &sP[],float &sE[])//Main fight structure
+float fihtstr(float sP[],float sE[])//Main fight structure
 {
     char choiceB;//user choice to attack or defend
     do
@@ -578,76 +577,93 @@ float fihtstr(float &sP[],float &sE[])//Main fight structure
     return sP[0];
 }
 
-float atkstr(float &sP[],float &sE[])
+float atkstr(float sP[],float sE[])
 {
     float dmgDne;//damage dealt, used for calculations
+    int accPl,accEn;//Accuracy of player, and accuracy of enemy
     
-    dmgDne=sP[1]-sE[2];
+    if((accPl=(rand()%90+10))>(accEn=(rand()%90+10))){
+        if(accPl-accEn>12){sP[1]+=5.0;}
+        dmgDne=sP[1]-sE[2];
     
-    if (dmgDne<0)
-    {
-        sP[0]+=dmgDne;
-        cout<<"The enemy counters, and hits you hard.\n";
-    }
-    if (dmgDne>0)
-    {
-        sE[0]-=dmgDne;
-        cout<<"Your blow lands, damaging the enemy!\n";
-        sP[0]+=5;
-    }
-    if (dmgDne==0)
-    {
+       if (dmgDne<0)
+       {
+           sP[0]+=dmgDne;
+           cout<<"The enemy counters, and hits you hard.\n";
+       }
+       if (dmgDne>0)
+       {
+           sE[0]-=dmgDne;
+           cout<<"Your blow lands, damaging the enemy!\n";
+           sP[0]+=5;
+       }
+       if (dmgDne==0)
+       {
         cout<<"You and the enemy cross blades, neither defeating the other!!\n";
+       }
+     }
+    else{
+        cout<<"Your attack missed completely!\n";
     }
     
+    if((accEn=(rand()%90+10))>(accPl=(rand()%90+10))){
     dmgDne=sE[1]-sP[2];
     
-    if (dmgDne<0)
-    {
-       sE[0]+=dmgDne;
-       cout<<"The enemy attempts to hurt you. You defend, parry, and counter strike.\n";
+       if (dmgDne<0)
+       {
+          sE[0]+=dmgDne;
+          cout<<"The enemy attempts to hurt you. You defend, parry, and counter strike.\n";
+       }
+       if (dmgDne>0)
+       {
+          sP[0]-=dmgDne;
+          cout<<"The enemy strikes back, landing a clean blow also.\n";
+       }
+       if (dmgDne==0)
+       {
+          cout<<"The enemy throws a blow, which you meet and block.\n";
+       }
     }
-    if (dmgDne>0)
-    {
-        sP[0]-=dmgDne;
-        cout<<"The enemy strikes back, landing a clean blow also.\n";
+    else{
+        cout<<"The enemy's attack missed completely!\n";
     }
-    if (dmgDne==0)
-    {
-        cout<<"The enemy throws a blow, which you meet and block.\n";
-    }
- 
-    //hlthET1=hE;
+    
+    hlthET1=sE[0];
     
     return sP[0];
 }
 
-float defstr(float &sP[],float &sE[])
+float defstr(float sP[],float sE[])
 {
     float dmgDne;//damage dealt, used for calculations
+    int accPl,accEn;//Accuracy of player, and accuracy of enemy
     
-    dP+=5;//strengthens defense
+    sP[2]+=5;//strengthens defense
     
-    dmgDne=aE-dP;
+    if((accEn=(rand()%90+10))>(accPl=(rand()%90+10))){
+       dmgDne=sE[1]-sP[2];
     
-    if (dmgDne<0)
-    {
-       hE+=dmgDne;
-       cout<<"The enemy attacked, but your superior defense gave you a counterattack!\n";
-    }
-    if (dmgDne>0)
-    {
-        hP-=dmgDne;
-        cout<<"The enemy strikes, hitting you back with painful ease.\n";
-    }
-    if (dmgDne==0)
-    {
-        cout<<"You parry the enemies attack, and strike back. The enemy reacts fast enough to "
-            <<"block you.\n";
-    }
+       if (dmgDne<0)
+       {
+          sE[0]+=dmgDne;
+          cout<<"The enemy attacked, but your superior defense gave you a counterattack!\n";
+       }
+       if (dmgDne>0)
+       {
+           sP[0]-=dmgDne;
+           cout<<"The enemy strikes, hitting you back with painful ease.\n";
+       }
+       if (dmgDne==0)
+       {
+           cout<<"You parry the enemies attack, and strike back. The enemy reacts fast enough to "
+               <<"block you.\n";
+       }
+       }
+       else{
+           cout<<"The enemy's attack missed completely!\n";
+       }
     
-    //hlthET2=hE;
+    hlthET2=sE[0];
  
     return sP[0];
 }
-
