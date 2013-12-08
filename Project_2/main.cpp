@@ -306,9 +306,9 @@ void game()
        <<" attached to the right arm. Already sensing the coming calamity, you draw your weapon and face it....\n";
    
    //second enemy stat set
-   statEn[1]=13.0;
-   statEn[2]=13.0;
-   statEn[0]=13.0;
+   statEn[1]=14.0;
+   statEn[2]=14.0;
+   statEn[0]=14.0;
 
    statPl[0]=fihtstr(statPl,statEn);
    
@@ -383,9 +383,9 @@ void game()
        <<"take a breath, and charge in letting loose your own growl...\n";
    
    //Third enemy stat set
-   statEn[1]=14.0;
-   statEn[2]=14.0;
-   statEn[0]=16.0;
+   statEn[1]=15.0;
+   statEn[2]=15.0;
+   statEn[0]=17.0;
    
    statPl[0]=fihtstr(statPl,statEn);
    
@@ -500,8 +500,8 @@ void game()
   
   //boss stat set
   statEn[1]=17.55;
-  statEn[2]=15.781;
-  statEn[0]=18;
+  statEn[2]=16.781;
+  statEn[0]=20;
   
   statPl[0]=fihtstr(statPl,statEn);
   
@@ -614,8 +614,8 @@ float atkstr(float sP[],float sE[])
     int accPl,accEn;//Accuracy of player, and accuracy of enemy
     
     if((accPl=(rand()%90+10))>(accEn=(rand()%90+10))){
-        if(accPl-accEn>12){
-            sP[1]+=5.0;
+        if(accPl-accEn>45||accEn-accPl>45){
+            sP[1]+=3.0;
             cout<<" You aim your strike at a weak point!\n";
         }
         dmgDne=sP[1]-sE[2];
@@ -672,7 +672,7 @@ float defstr(float sP[],float sE[])
     float dmgDne;//damage dealt, used for calculations
     int accPl,accEn;//Accuracy of player, and accuracy of enemy
     
-    sP[2]+=5;//strengthens defense
+    sP[2]+=2.0;//strengthens defense
     
     if((accEn=(rand()%90+10))>(accPl=(rand()%90+10))){
        dmgDne=sE[1]-sP[2];
@@ -702,7 +702,8 @@ float defstr(float sP[],float sE[])
     return sP[0];
 }
 
-void loseGm(){
+//**********************************************************************************
+void loseGm(){//losing message
     cout<<" \n";
     cout<<"   @@    @@     @@    @    @        @       @@     @@      @@@@     \n";
     cout<<"     @  @      @  @   @    @        @      @  @   @  @     @        \n";
