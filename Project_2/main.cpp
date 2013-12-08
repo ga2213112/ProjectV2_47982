@@ -17,15 +17,14 @@ using namespace std;
 
 
 //Global Variables
-float hlthET1,hlthET2;//used for passing enemy health data between functions
 
 //Function Prototypes
 void game();
 void records();
 void main_ttl();
-float fihtstr(float,float,float,float,float,float);//Main fighting structure
-float atkstr(float,float,float,float,float,float);//Attack structure
-float defstr(float,float,float,float,float,float);//Defense structure
+float fihtstr(float []&,float []&);//Main fighting structure
+float atkstr(float []&,float []&);//Attack structure
+float defstr(float []&,float []&);//Defense structure
 
 //Execution begins Here
 int main(int argc, char** argv) 
@@ -105,8 +104,8 @@ void main_ttl()
 void game()
 {
   //Declare variables for main game
-   float atkP=0,defP=0,hlthP=0,accP=0,//Player stats
-         atkE=0,defE=0,hlthE=0,accE=0;//Enemy stats
+   float statPl[3]={0,0,0},//Player stats
+         statEn[3]={0,0,0};//Enemy stats
    char choiceC,//user's choice of character type
         choiceG;//in game choices for paths
            
@@ -130,10 +129,9 @@ void game()
          case 'a'://for attackers
          case 'A':
          {
-             atkP+=(15.0+15.0*1.2e-1f);
-             defP+=6.0;
-             hlthP+=9.0;
-             accP+=10.0;
+             statPl[1]+=(15.0+15.0*1.2e-1f);
+             statPl[2]+=6.0;
+             statPl[0]+=9.0;
              
              break;
          }
@@ -141,10 +139,9 @@ void game()
          case 'd'://for defenders
          case 'D':
          {
-             atkP+=6.0;
-             defP+=(12.0+12.0*1.2e-1f);
-             hlthP+=12.0;
-             accP+=10.0;
+             statPl[1]+=6.0;
+             statPl[2]+=(12.0+12.0*1.2e-1f);
+             statPl[0]+=12.0;
             
              break;
          }
@@ -152,10 +149,9 @@ void game()
          case 'b':
          case 'B':
          {
-             atkP+=11.0;
-             defP+=11.0;
-             hlthP+=11.0;
-             accP+=10.0;
+             statPl[1]+=11.0;
+             statPl[2]+=11.0;
+             statPl[0]+=11.0;
              
              break;
          }
@@ -168,7 +164,7 @@ void game()
          }
      }
      
-   }while(atkP==0&&defP==0);
+   }while(statPl[1]==0&&statPl[2]==0);
    
    //Opening scene
    cout<<" \n";
@@ -215,11 +211,11 @@ void game()
                  <<"Your eyes, however, are glued to the dead looking warrior in front of you holding a long-sword."
                  <<"You lift up your short sword before you, knowing exactly what is coming...\n";
              //Enemy stat set
-             atkE+=12.0;
-             defE+=8.0;
-             hlthE+=9.0;
+             statEn[1]+=12.0;
+             statEn[2]+=8.0;
+             statEn[0]+=9.0;
              
-             hlthP=fihtstr(atkP,defP,hlthP,atkE,defE,hlthE);
+             statPl[0]=fihtstr(statPl,statEn);
              
              //reward for battle
              if (hlthP>0)
@@ -537,7 +533,7 @@ void records()//creates a record of winners
 
 //****************************************************************************
 //After this point,functions are all battle functions of game
-float fihtstr(float aP,float dP,float hP,float aE,float dE,float hE)//Main fight structure
+float fihtstr(float &sP[],float &sE[])//Main fight structure
 {
     char choiceB;//user choice to attack or defend
     do
@@ -555,8 +551,8 @@ float fihtstr(float aP,float dP,float hP,float aE,float dE,float hE)//Main fight
                 cout<<"Your grip your weapon tight, and ready yourself. You lunge"
                     <<" forward and strike ruthlessly. The enemy growls, and charges in.\n";
                 
-                hP=atkstr(aP,dP,hP,aE,dE,hE);
-                hE=hlthET1;
+                sP[0]=atkstr(sP,sE);
+                //hE=hlthET1;
                 break;
             }
             
@@ -566,8 +562,8 @@ float fihtstr(float aP,float dP,float hP,float aE,float dE,float hE)//Main fight
                 cout<<"You draw a deep breath, and prepare your guard. You let the enemy lunge"
                     <<" in, and defend yourself.\n";
                 
-                hP=defstr(aP,dP,hP,aE,dE,hE);
-                hE=hlthET2;
+                sP[0]=defstr(sP,sE);
+                //hE=hlthET2;
                 break;
             }
             
@@ -577,43 +573,43 @@ float fihtstr(float aP,float dP,float hP,float aE,float dE,float hE)//Main fight
             }
         }
         
-    }while(hP>0&&hE>0);
+    }while(sP[0]>0&&sE[0]>0);
     
-    return hP;
+    return sP[0];
 }
 
-float atkstr(float aP,float dP,float hP,float aE,float dE,float hE)
+float atkstr(float &sP[],float &sE[])
 {
     float dmgDne;//damage dealt, used for calculations
     
-    dmgDne=aP-dE;
+    dmgDne=sP[1]-sE[2];
     
     if (dmgDne<0)
     {
-        hP+=dmgDne;
+        sP[0]+=dmgDne;
         cout<<"The enemy counters, and hits you hard.\n";
     }
     if (dmgDne>0)
     {
-        hE-=dmgDne;
+        sE[0]-=dmgDne;
         cout<<"Your blow lands, damaging the enemy!\n";
-        hP+=5;
+        sP[0]+=5;
     }
     if (dmgDne==0)
     {
         cout<<"You and the enemy cross blades, neither defeating the other!!\n";
     }
     
-    dmgDne=aE-dP;
+    dmgDne=sE[1]-sP[2];
     
     if (dmgDne<0)
     {
-       hE+=dmgDne;
+       sE[0]+=dmgDne;
        cout<<"The enemy attempts to hurt you. You defend, parry, and counter strike.\n";
     }
     if (dmgDne>0)
     {
-        hP-=dmgDne;
+        sP[0]-=dmgDne;
         cout<<"The enemy strikes back, landing a clean blow also.\n";
     }
     if (dmgDne==0)
@@ -621,12 +617,12 @@ float atkstr(float aP,float dP,float hP,float aE,float dE,float hE)
         cout<<"The enemy throws a blow, which you meet and block.\n";
     }
  
-    hlthET1=hE;
+    //hlthET1=hE;
     
-    return hP;
+    return sP[0];
 }
 
-float defstr(float aP,float dP,float hP,float aE,float dE,float hE)
+float defstr(float &sP[],float &sE[])
 {
     float dmgDne;//damage dealt, used for calculations
     
@@ -650,8 +646,8 @@ float defstr(float aP,float dP,float hP,float aE,float dE,float hE)
             <<"block you.\n";
     }
     
-    hlthET2=hE;
+    //hlthET2=hE;
  
-    return hP;
+    return sP[0];
 }
 
